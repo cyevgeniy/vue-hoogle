@@ -1,15 +1,20 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
 import { search } from './api/hoogle'
 
+const query = ref('')
 const res = ref<any>([])
 const loading = ref(false)
 
-onMounted(async () => {
+async function onSearch() {
+  if (!query.value) {
+    res.value = []
+    return
+  }
+
   try {
     loading.value = true
-    const resp = await search('print')
+    const resp = await search(query.value)
     if (resp.status === 200)
       res.value = resp.data
   } catch (e: any) {
@@ -18,22 +23,14 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
-})
+}
 </script>
 
 <template>
-  <div v-if="!loading" v-for="item in res">
-    <p v-html="item.docs" />
+    <input  v-model="query">
+    <button @click="onSearch"> Search </button>
 
-  </div>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-
-  <HelloWorld msg="Vite + Vue" />
+    <div v-if="!loading" v-for="item in res">
+      <p v-html="item.docs" />
+    </div>
 </template>
