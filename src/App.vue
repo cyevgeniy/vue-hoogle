@@ -31,6 +31,7 @@ async function onSearch() {
     <button @click="onSearch"> Search </button>
 
     <div v-if="!loading" v-for="item in res">
+      <a :href="item.url" target="_blank"><h2 v-html="item.item" /></a>
       <p v-html="item.docs" />
     </div>
 </template>
