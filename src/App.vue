@@ -28,16 +28,20 @@ async function onSearch(query: string) {
 
 <template>
   <div class="w-full flex flex-col gap-4 items-center">
-    <div class="max-w-[700px] w-full self-center flex gap-2 items-center">
-        <h2 class="font-sans text-2xl lg:text-4xl my-0 text-purple-700"> Hoogle </h2>
-        <SearchBar class="w-full" @search="onSearch"/>
+    <div class="border-b-slate-300 w-full flex flex-col bg-slate-50/90 pb-2 sticky top-0 m-0 p-2">
+      <div class="max-w-[700px] w-full self-center flex gap-2 items-center sticky ">
+          <h2 class="font-sans text-2xl lg:text-4xl my-0 text-purple-700"> Hoogλe </h2>
+          <SearchBar class="w-full" @search="onSearch"/>
+      </div>
     </div>
 
-    <div v-if="!loading" class="w-full" v-for="item in res">
-      <a class="text-16px text-blue-500 hover:text-blue-700" :href="item.url" target="_blank">
-        <h2 v-html="item.item" />
-      </a>
-      <div class="docs" v-html="item.docs" />
+    <div v-if="!loading" class="w-full max-w-700px">
+      <div v-for="item in res">
+        <a class="text-16px text-blue-500 hover:text-blue-700" :href="item.url" target="_blank">
+          <h2 v-html="item.item" />
+        </a>
+        <div class="docs" v-html="item.docs" />
+      </div>
     </div>
   </div>
 </template>
