@@ -4,6 +4,7 @@ import Vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import presetAttributify from '@unocss/preset-attributify'
 import presetUno from '@unocss/preset-uno'
+import presetIcons from '@unocss/preset-icons'
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 
 const iconDirectory = resolve(__dirname, 'icons')
@@ -18,7 +19,8 @@ export default defineConfig({
       ],
       presets: [
         presetUno(),
-        presetAttributify()
+        presetAttributify(),
+        presetIcons(),
       ],
     }),
   ],
