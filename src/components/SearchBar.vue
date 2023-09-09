@@ -19,7 +19,7 @@ function onSubmit(e: Event) {
   <form @submit="onSubmit">
     <div class="flex gap-2">
       <HInput v-model="query" class="grow" placeholder="search for..." />
-      <HButton @click="$emit('search', query)">
+      <HButton @click="$emit('search', query)" class="hidden sm:block">
         Search
       </HButton>
     </div>

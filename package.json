@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@unocss/reset": "^0.55.7",
     "axios": "^1.5.0",
     "vue": "^3.3.4"
   },

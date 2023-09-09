@@ -6,6 +6,8 @@ import SearchBar from './components/SearchBar.vue'
 const res = ref<any>([])
 const loading = ref(false)
 
+const githubLink = ref("https://github.com/cyevgeniy/vue-hoogle")
+
 async function onSearch(query: string) {
   if (!query) {
     res.value = []
@@ -27,34 +29,41 @@ async function onSearch(query: string) {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-4">
-    <div class="border-b-slate-300 w-full flex justify-center items-center bg-slate-50/90 pb-2 sticky top-0 m-0 p2">
-      <div class="max-w-[700px] w-full flex gap-2 items-center">
+  <div class="border border-b-slate-300 w-full gap-2 sm:gap-4 flex justify-center items-center bg-slate-50/90 pb-2 sticky top-0 m-0 p2">
+      <div class="flex-1" />
+      <div class="max-w-[700px] w-full flex flex-col sm:flex-row gap-2 items-center">
           <h2 class="font-sans text-2xl lg:text-4xl my-0 text-purple-700"> Hoogλe </h2>
           <SearchBar class="w-full" @search="onSearch"/>
+          <div class="flex gap-2 flex-wrap self-start sm:hidden">
+            <a :href="githubLink" class="op-70 hover:op-90 ">Github</a>
+          </div>
       </div>
-      <div class="flex gap-2 items-center ml-auto mr4 justify-end">
-        <div flex justify-center text-2xl op30 hover="op80">
+      
+      <div class="flex flex-1 gap-2 items-center mr4 justify-end">
+        <div class="hidden sm:flex" justify-center text-2xl op30 hover="op80">
           <a
             class="i-carbon-logo-github"
             text-inherit
-            href="https://github.com/cyevgeniy/vue-hoogle"
+            :href="githubLink"
             target="_blank"
           ></a>
         </div>
       </div>
-    </div>
+  </div>
 
-    <div v-if="!loading" class="w-full max-w-700px p-2">
-      <div v-for="item in res">
-        <a class="text-base font-bold font-sans text-blue-500 hover:text-blue-700" :href="item.url" target="_blank">
-          <h2 v-html="item.item" />
-        </a>
-        <div class="docs" v-html="item.docs" />
+  <div class="w-full flex flex-col items-center gap-4 p2 mt-6">
+    <div class="w-full max-w-[700px] flex flex-col gap-6">
+      <template v-if="!loading">
+        <div v-for="item in res">
+          <a class="text-base font-bold font-sans text-blue-500 hover:text-blue-700" :href="item.url" target="_blank">
+            <h2 v-html="item.item" />
+          </a>
+          <div class="docs" v-html="item.docs" />
+        </div>
+      </template>
+      <div v-else class="font-xl mt-10 font-sans animate-bounce w-full p2">
+        Loading...
       </div>
-    </div>
-    <div v-else class="font-xl mt-10 font-sans animate-bounce w-full p2">
-      Loading...
     </div>
   </div>
 </template>
