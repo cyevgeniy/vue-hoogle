@@ -19,5 +19,10 @@ const _modelValue = computed({
 </script>
 
 <template>
-  <input v-model="_modelValue" class="p-2 rounded-lg ring-0 outline-none border-blue-300 focus:border-blue-700" v-bind="$attrs">
+  <input
+    v-model="_modelValue"
+    class="p-2 rounded-lg ring-0 outline-none"
+    border="~ blue-300 focus:blue-700"
+    v-bind="$attrs"
+  >
 </template>
